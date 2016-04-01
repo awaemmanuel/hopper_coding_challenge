@@ -1,10 +1,11 @@
-# hopper_coding_challenge
-The coding challenge for hopper.com
+# solution to coding challenge.
+*Given an hour and minute return the time in words.*
 
 Table of contents:
+
 1. [Solution Client Class](README.md#1-solution.java)
-2. [Integer to String converter](README.md#2-IntToStringConverter.java)
-3. [Time Interpretation module](README.md#3-TimeInterpreter.java)
+2. [Integer to String converter](README.md#2-intToStringConverter.java)
+3. [Time Interpretation module](README.md#3-timeInterpreter.java)
 4. [Solution Approach](README.md#4-solution Approach)
  
 ## Solution.java 
