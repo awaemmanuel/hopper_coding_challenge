@@ -1,36 +1,37 @@
 public class TimeInterpreter {
     private int _hour, _minute;
-    private boolean _isTimePM;
+    private boolean _isTimePM = false;
     private static final int ZERO_MINUTE = 0;
     private static final int ONE_MINUTE = 1;
     private static final int FIFTEEN_MINUTES = 15;
     private static final int THIRTY_MINUTES = 30;
     private static final int FORTYFIVE_MINUTES = 45;
-    public static final int FIFTYNINE_MINUTES = 59;
+    private static final int FIFTYNINE_MINUTES = 59;
     private static final int TWELVE_HOURS = 12;
     private static final double NEAREST_HOUR_ROUNDER = 0.5;
 
 
     /* Overloaded constructors */
     public TimeInterpreter(int hour, int minute) {
-        this._hour = hour;
-        this._minute = minute;
-        if (this._hour > TWELVE_HOURS) this._isTimePM = true;
+        set_hour(hour);
+        set_minute(minute);
+        if (get_hour() > TWELVE_HOURS) set_isTimePM(true);
     }
     public TimeInterpreter(double hour, double minute) {
         // Round to closest hour
-        this._hour = (int) (hour + NEAREST_HOUR_ROUNDER);
-        this._minute = (int) (minute);
-        if (this._hour > TWELVE_HOURS) this._isTimePM = true;
+        set_hour((int) (hour + NEAREST_HOUR_ROUNDER));
+        set_minute((int)(minute));
+        if (get_hour() > TWELVE_HOURS) set_isTimePM(true);
     }
     public TimeInterpreter(String hour, String minute) {
         try {
-            this._hour = Integer.parseInt(hour);
-            this._minute = Integer.parseInt(minute);
-            if (this._hour > TWELVE_HOURS) this._isTimePM = true;
+            set_hour(Integer.parseInt(hour));
+            set_minute(Integer.parseInt(minute));
+            if (get_hour() > TWELVE_HOURS) set_isTimePM(true);
         }
         catch (NumberFormatException e) {
-            throw new NumberFormatException("[BAD NUMBER FORMAT] - Float not allowed. You can use plain float to instantiate instead");
+            throw new NumberFormatException("[BAD NUMBER FORMAT] - Float not allowed in String constructor. " +
+                    "You can use plain float constructor to instantiate instead");
         }
 
     }
@@ -40,19 +41,26 @@ public class TimeInterpreter {
     * Converts the validated hour and minute,          *
     * generates the time in words and returns string   *
     ****************************************************/
-    public String translate() {
+    private String translate() {
+        try{
+            this.validateInput();
+        }
+        catch (AssertionError e) {
+            throw new AssertionError("[INPUT ERROR] - Please check your input.");
+        }
+
         StringBuilder translation = new StringBuilder();
-        String minuteString;
+        String minuteString, hour, minute;
         int minuteDifference = ZERO_MINUTE,
                 inputMin = get_minute(),
                 inputHr = get_hour();
 
         // Flags for edge cases
-        boolean halfPast, quarterPast, quarterTo, topOfTheHour, notEdgeTime, pastThirty;
-        halfPast = inputMin == THIRTY_MINUTES;
-        quarterPast = inputMin == FIFTEEN_MINUTES;
-        quarterTo = inputMin == FORTYFIVE_MINUTES;
-        topOfTheHour = inputMin == ZERO_MINUTE;
+        boolean halfPast, quarterPast, quarterTo, topOfTheHour, notEdgeTime, pastThirty = false;
+        halfPast = (inputMin == THIRTY_MINUTES);
+        quarterPast = (inputMin == FIFTEEN_MINUTES);
+        quarterTo = (inputMin == FORTYFIVE_MINUTES);
+        topOfTheHour = (inputMin == ZERO_MINUTE);
         notEdgeTime = !(halfPast || quarterPast || quarterTo || topOfTheHour);
 
         // Get the right values of time to convert to string based on location of hands on the clock
@@ -62,51 +70,75 @@ public class TimeInterpreter {
             inputHr += 1;
             pastThirty = true;
         }
+        if (quarterTo) {
+            inputHr += 1;
+        }
 
-
-
-
-        minuteString = get_minute() > ONE_MINUTE ? "minutes " : "minute ";
-
-
-
-        // Convert hour and minute to string representations.
-        String hour = IntToStringConverter.convert(get_hour());
-        String minute = IntToStringConverter.convert(get_minute());
-
+        /*
+        * Do translation of hour and string that we have now
+        Convert hour and minute to string representations.
+        */
+        hour = IntToStringConverter.convert(inputHr);
+        minute = IntToStringConverter.convert(inputMin);
+        minuteString = inputMin > ONE_MINUTE ? "minutes " : "minute ";
+        
+        // For edge cases (quarters/half) make sure the minute string is translated accordingly
         if (notEdgeTime) {
-            // Minute is just in first half of hour - PAST area
-            if (get_minute() >= ZERO_MINUTE && get_minute() < THIRTY_MINUTES) {
-                translation.append(minute + " " + minuteString + " ");
-                translation.append("after" + hour);
-            }
-            // Minute is heading towards a new hour - TO area
-            else {
-                minuteDifference = get_minute() - THIRTY_MINUTES;
-                minuteString = minuteDifference > ONE_MINUTE ? "minutes " : "minute ";
-                translation.append(minute + " " + minuteString + " ");
-                translation.append("before " + hour);
-            }
+            String direction = pastThirty ? "to " : "past ";
+            translation.append(minute + minuteString + direction + hour.toLowerCase());
         }
-        // Top of hour, quarter (past/to), half past
+        // Top of hour, quarter (past/to), half past cases
         else {
-
+            String outputFormatter = "";
+            if (topOfTheHour) {
+                outputFormatter = inputHr == 0 ? "It's MIDNIGHT!" :  hour + "o' clock";
+            }
+            if (quarterPast) {
+                outputFormatter = inputHr == 0 ? "Quarter past midnight" : "Quarter past " + hour.toLowerCase();
+            }
+            if (quarterTo) {
+                outputFormatter = inputHr == 0 ? "Quarter to midnight" : "Quarter to " + hour.toLowerCase();
+            }
+            if (halfPast) {
+                outputFormatter = inputHr == 0 ? "Half past midnight" : "Half past " + hour.toLowerCase();
+            }
+            translation.append(outputFormatter);
         }
-        return translation.toString();
-//        return String.format("%s,%s", hour, minute);
 
+        // Check if it is AM or PM at this point
+        if (isTimePM()) {
+            translation.append(" PM.\n");
+        }
+        else {
+            translation.append(" AM.\n");
+        }
+
+        // Return translated result
+        return translation.toString();
+    }
+
+    // Display result
+    private void display(){
+        System.out.format(translate());
+        System.out.flush();
     }
 
     /* All input validations go here
      * 1. Validate the time range of input
       * 2. Ensure the input format of input (AM or PM) */
-    protected void validateInput() throws AssertionError {
+    private void validateInput() throws AssertionError {
         /* Ensure number in normal time range */
         if ((this._hour < 0) || (this._hour > 23)) throw new AssertionError("[TIME RANGE ERROR] - Allowed Hour range is 0-23");
         if ((this._minute < 0) || (this._minute > 59)) throw new AssertionError("[TIME RANGE ERROR] - Allowed Minute range is 0-59");
 
         /* If in the PM, normalize hour */
-        if (this._isTimePM) set_hour(this._hour % 12);
+        if (isTimePM()) set_hour(this._hour % 12);
+    }
+
+    // Call validate and display to avoid two function calls from client side
+    public void validateAndDisplay() {
+        validateInput();
+        display();
     }
 
     /* Getters and Setters */

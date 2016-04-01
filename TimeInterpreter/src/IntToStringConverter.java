@@ -1,7 +1,13 @@
 /**
  * Created by Emmanuel Awa on 3/31/16.
- * A generalized class that can convert a digit/number
+ * A generalized static class that can convert a digit/number
  * to its string representation.
+ *  - The choice for a static class is to avoid unnecessary class instantiation.
+ *  We therefore have access to the conversion method without creation a class.
+ *
+ *
+ * Inspired Converting Numbers to Words post by Jonathan Wood
+ *  - http://www.blackbeltcoder.com/Articles/strings/converting-numbers-to-words
  */
 public class IntToStringConverter {
     /* String array for digit to word representation
@@ -73,56 +79,52 @@ public class IntToStringConverter {
         stringDigits = Integer.toString(digits);
 
         int i = stringDigits.length() - 1, word;
-        boolean showThousands;
+        boolean displayThousands;
         boolean allZeros = true;
 
         while (i >= 0) {
-            int ndigit = (int)(stringDigits.charAt(i) - '0');
-            int column = (stringDigits.length() - (i + 1));
+            // utilize the ascii chart values to get integer values
+            int digitIdx = (stringDigits.charAt(i) - '0');
+            int digitCol = (stringDigits.length() - (i + 1));
 
             // Determine if units, tens, or hundreds column
-            switch (column % 3)
+            switch (digitCol % 3)
             {
-                case 0:        // Ones position
-                    showThousands = true;
+                // Parse the ones position in traversal
+                case 0:
+                    displayThousands = true;
                     if (i == 0)
                     {
-                        // First digit in number (last in loop)
-                        temp = String.format("%s ", _units[ndigit]);
+                        // unit value of number - ones place
+                        temp = String.format("%s ", _units[digitIdx]);
                     }
                     else if (stringDigits.charAt(i - 1) == '1')
                     {
-                        // This digit is part of "teen" value
-                        temp = String.format("%s ",_teens[ndigit]);
-
-                        // Skip tens position
-                        i--;
+                        // Found a digit that makes up a teen value
+                        // find corresponding value in teens dictionary and skip one tens position.
+                        temp = String.format("%s ",_teens[digitIdx]);
+                        i -= 1;
                     }
-                    else if (ndigit != 0)
+                    else if (digitIdx != 0)
                     {
-                        // Any non-zero digit
-                        temp = String.format("%s ", _units[ndigit]);
-
+                        // Non-Zero value
+                        temp = String.format("%s ", _units[digitIdx]);
                     }
                     else
                     {
-                        // This digit is zero. If digit in tens and hundreds
+                        // This digit is zero. If digit is in tens and hundreds
                         // column are also zero, don't show "thousands"
-
                         // Test for non-zero digit in this grouping
-                        showThousands = stringDigits.charAt(i - 1) != '0'
+                        displayThousands = stringDigits.charAt(i - 1) != '0'
                                 || (i > 1 && stringDigits.charAt(i - 2) != '0');
                     }
 
                     // Show "thousands" if non-zero in grouping
-                    if (showThousands)
+                    if (displayThousands)
                     {
-                        if (column > 0)
+                        if (digitCol > 0)
                         {
-                            temp = String.format("%s%s%s",
-                                    temp,
-                                    _higher[column / 3],
-                                    allZeros ? " " : ", ");
+                            temp = String.format("%s%s%s", temp, _higher[digitCol / 3], allZeros ? " " : ", ");
                         }
                         // Indicate non-zero digit encountered
                         allZeros = false;
@@ -131,19 +133,19 @@ public class IntToStringConverter {
                     break;
 
                 case 1:        // Tens column
-                    if (ndigit > 0)
+                    if (digitIdx > 0)
                     {
                         temp = String.format("%s%s",
-                                _tens[ndigit],
-                                (stringDigits.charAt(i + 1) != '0') ? "-" : " ");
+                                _tens[digitIdx],
+                                (stringDigits.charAt(i + 1) != '0') ? " " : " ");
                         result.insert(0, temp);
                     }
                     break;
 
                 case 2:        // Hundreds column
-                    if (ndigit > 0)
+                    if (digitIdx > 0)
                     {
-                        temp = String.format("%s hundred ", _units[ndigit]);
+                        temp = String.format("%s hundred ", _units[digitIdx]);
                         result.insert(0, temp);
                     }
                     break;
