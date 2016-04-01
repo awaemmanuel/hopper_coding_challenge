@@ -3,7 +3,10 @@ The coding challenge for hopper.com
 
 Table of contents:
 1. [Solution Client Class](README.md#1-solution.java)
-2. [Integer to String converter](README.md#1-IntToStringConverter.java)
+2. [Integer to String converter](README.md#2-IntToStringConverter.java)
+3. [Time Interpretation module](README.md#3-TimeInterpreter.java)
+4. [Solution Approach](README.md#4-solution Approach)
+ 
 ## Solution.java 
 [Solution Client Class](TimeInterpreter/src/Solution.java) - This is the main entry point to test out the classes.
 
