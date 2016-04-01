@@ -13,7 +13,7 @@ Table of contents:
 
 ## IntToStringConverter.java 
 [Digit(s) to String representation converter](TimeInterpreter/src/IntToStringConverter.java)
-A generic class that takes any digit and returns to the words representation
+A class that takes any digit and returns to the words representation
 This class is largely inspired by my research online for a more robust way to
 handle this type of conversion.
 In the spirit of OOP, I've choosen to implement this class to abstract,
