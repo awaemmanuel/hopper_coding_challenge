@@ -3,10 +3,10 @@
 
 Table of contents:
 
-1. [Solution Client Class](README.md#1-solution.java)
-2. [Integer to String converter](README.md#2-intToStringConverter.java)
-3. [Time Interpretation module](README.md#3-timeInterpreter.java)
-4. [Solution Approach](README.md#4-solution-pproach)
+1. [Solution Client Class](README.md#1-solutionjava)
+2. [Integer to String converter](README.md#2-intToStringConverterjava)
+3. [Time Interpretation module](README.md#3-timeInterpreterjava)
+4. [Solution Approach](README.md#4-solution-approach)
 5. [Unit Tests](README.md#5-unit-tests)
  
 ## Solution.java 
