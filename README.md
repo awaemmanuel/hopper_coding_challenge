@@ -4,9 +4,9 @@
 Table of contents:
 
 1. [Solution Client Class](README.md#solutionjava)
-2. [Integer to String converter](README.md#2-intToStringConverterjava)
-3. [Time Interpretation module](README.md#3-timeInterpreterjava)
-4. [Solution Approach](README.md#4-solution-approach)
+2. [Integer to String converter](README.md#inttostringconverterjava)
+3. [Time Interpretation module](README.md#timeinterpreterjava)
+4. [Solution Approach](README.md#solution-approach)
 5. [Unit Tests](README.md#5-unit-tests)
  
 ## Solution.java 
