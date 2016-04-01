@@ -34,3 +34,58 @@ and floats that can be parsed as valid integers.
 NOTE: To utilize the string overloaded constructor, it must be a valid integer encapsulated in string "5" and not a float
 like "5.09"
 
+## Solution Approach
+
+In Solution.java, you will find sample test cases as the following.
+```
+TimeInterpreter timeInterpreter;
+
+        // Validate constructor overloading with strings
+        timeInterpreter = new TimeInterpreter("4", "59");
+        timeInterpreter.validateAndDisplay();
+
+        // Validate constructor overloading with floating point numbers
+        timeInterpreter = new TimeInterpreter(5.009, 0.999);
+        timeInterpreter.validateAndDisplay();
+
+        // Validate constructor overloading with integers
+        timeInterpreter = new TimeInterpreter(5, 01);
+        timeInterpreter.validateAndDisplay();
+
+        timeInterpreter = new TimeInterpreter(5, 10);
+        timeInterpreter.validateAndDisplay();
+
+        timeInterpreter = new TimeInterpreter(5, 15);
+        timeInterpreter.validateAndDisplay();
+
+        timeInterpreter = new TimeInterpreter(5, 30);
+        timeInterpreter.validateAndDisplay();
+
+        timeInterpreter = new TimeInterpreter(5, 40);
+        timeInterpreter.validateAndDisplay();
+
+        timeInterpreter = new TimeInterpreter(5, 45);
+        timeInterpreter.validateAndDisplay();
+
+        timeInterpreter = new TimeInterpreter(5, 47);
+        timeInterpreter.validateAndDisplay();
+
+        timeInterpreter = new TimeInterpreter(5, 28);
+        timeInterpreter.validateAndDisplay();
+```
+
+
+The code executes and outputs the following results. As defined in the problem.
+```
+One minute to five  AM.
+Five o' clock AM.
+One minute past five  AM.
+Ten minutes past five  AM.
+Quarter past five  AM.
+Half past five  AM.
+Twenty minutes to six  AM.
+Quarter to six  AM.
+Thirteen minutes to six  AM.
+Twenty eight minutes past five  AM.
+```
+
