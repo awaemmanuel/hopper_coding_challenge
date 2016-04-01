@@ -3,7 +3,7 @@
 
 Table of contents:
 
-1. [Solution Client Class](README.md#1-solutionjava)
+1. [Solution Client Class](README.md#solutionjava)
 2. [Integer to String converter](README.md#2-intToStringConverterjava)
 3. [Time Interpretation module](README.md#3-timeInterpreterjava)
 4. [Solution Approach](README.md#4-solution-approach)
