@@ -7,6 +7,7 @@ Table of contents:
 2. [Integer to String converter](README.md#2-intToStringConverter.java)
 3. [Time Interpretation module](README.md#3-timeInterpreter.java)
 4. [Solution Approach](README.md#4-solution Approach)
+5. [Unit Tests](README.md#5-unit tests)
  
 ## Solution.java 
 [Solution Client Class](TimeInterpreter/src/Solution.java) - This is the main entry point to test out the classes.
@@ -95,4 +96,6 @@ Quarter to six  AM.
 Thirteen minutes to six  AM.
 Twenty eight minutes past five  AM.
 ```
-
+## Unit Tests
+The following link shows Junit4 test cases that have executed successfully with no failures.
+[Successfully validated Testcases](TimeInterpreter/src/TimeInterpreterTest.java)
