@@ -4,8 +4,11 @@ public class Solution {
         System.out.println(result);
 
         /* Instantiate a time interpretation class */
-        TimeInterpreter timeInterpreter = new TimeInterpreter(24.456, 898);
+        TimeInterpreter timeInterpreter = new TimeInterpreter(23, 59);
         timeInterpreter.validateInput();
+        System.out.println(timeInterpreter.get_hour());
+        System.out.println(timeInterpreter.translate());
+
 
     }
 
