@@ -91,16 +91,16 @@ public class TimeInterpreter {
         else {
             String outputFormatter = "";
             if (topOfTheHour) {
-                outputFormatter = inputHr == 0 ? "It's MIDNIGHT!" :  hour + "o' clock";
+                outputFormatter = (inputHr == 0) ? "It's MIDNIGHT!" :  hour + "o' clock";
             }
             if (quarterPast) {
-                outputFormatter = inputHr == 0 ? "Quarter past midnight" : "Quarter past " + hour.toLowerCase();
+                outputFormatter = (inputHr == 0) ? "Quarter past midnight" : "Quarter past " + hour.toLowerCase();
             }
             if (quarterTo) {
-                outputFormatter = inputHr == 0 ? "Quarter to midnight" : "Quarter to " + hour.toLowerCase();
+                outputFormatter = (inputHr == 0) ? "Quarter to midnight" : "Quarter to " + hour.toLowerCase();
             }
             if (halfPast) {
-                outputFormatter = inputHr == 0 ? "Half past midnight" : "Half past " + hour.toLowerCase();
+                outputFormatter = (inputHr == 0) ? "Half past midnight" : "Half past " + hour.toLowerCase();
             }
             translation.append(outputFormatter);
         }
