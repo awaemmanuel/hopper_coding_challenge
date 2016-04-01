@@ -141,6 +141,11 @@ public class TimeInterpreter {
         display();
     }
 
+    // method for quickly unit testing our code
+    protected String unitTestInterpretation() {
+        return translate();
+    }
+
     /* Getters and Setters */
     public int get_hour() {
         return _hour;
