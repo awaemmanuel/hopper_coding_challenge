@@ -1,10 +1,11 @@
 # hopper_coding_challenge
 The coding challenge for hopper.com
 
-## Solution.class
-This is the main entry point to test out the classes.
+## Solution.java 
+[Solution Client Class](TimeInterpreter/src/Solution.java) - This is the main entry point to test out the classes.
 
-## IntToStringConverter.class
+## IntToStringConverter.java 
+[Digit(s) to String representation converter](TimeInterpreter/src/IntToStringConverter.java)
 A generic class that takes any digit and returns to the words representation
 This class is largely inspired by my research online for a more robust way to
 handle this type of conversion.
@@ -14,7 +15,8 @@ utilize this class for other purposes.
 The interaction between this class and TimeInterpreter.class is entirely
 agnostic.
 
-## TimeInterpreter.class
+## TimeInterpreter.java
+[Time Interpretation module](TimeInterpreter/src/TimeInterpreter.java)
 This is the core of the application. In my solution design I had two choices.
 1. Validate during class instantiation - This was I can utilize constructor
 overloading to allow users the flexibility of input types. i.e - Hour and Minutes
