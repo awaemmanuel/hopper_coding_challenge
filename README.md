@@ -7,7 +7,7 @@ Table of contents:
 2. [Integer to String converter](README.md#inttostringconverterjava)
 3. [Time Interpretation module](README.md#timeinterpreterjava)
 4. [Solution Approach](README.md#solution-approach)
-5. [Unit Tests](README.md#5-unit-tests)
+5. [Unit Tests](README.md#unit-tests)
  
 ## Solution.java 
 [Solution Client Class](TimeInterpreter/src/Solution.java) - This is the main entry point to test out the classes.
