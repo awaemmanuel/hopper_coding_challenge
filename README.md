@@ -1,4 +1,4 @@
-# solution to coding challenge.
+# solution
 *Given an hour and minute return the time in words.*
 
 Table of contents:
